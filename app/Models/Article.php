@@ -9,7 +9,7 @@ class Article extends Model
     protected $fillable = [
         'name',
         'description',
-        'imageUrl',
+        'image',
         'isActive',
         'price',
         'stock',

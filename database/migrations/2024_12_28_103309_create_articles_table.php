@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('imageUrl')->nullable();
+            $table->binary('image')->nullable();
             $table->boolean('isActive')->default(true);
             $table->integer('price');
             $table->integer('stock');

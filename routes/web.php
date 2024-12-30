@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\permissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\roleController;
@@ -40,13 +41,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/articles/{id}',[ArticleController::class,'update'])->name('articles.update');
     Route::delete('/articles',[ArticleController::class,'destroy'])->name('articles.destroy');
     //categories
-    Route::get('/categories',[ArticleController::class,'categories'])->name('categories.index');
-    Route::get('/categories/create',[ArticleController::class,'createCategories'])->name('categories.create');  
-    Route::post('/categories',[ArticleController::class,'storeCategories'])->name('categories.store');
-    Route::get('/categories/{id}/edit',[ArticleController::class,'editCategories'])->name('categories.edit');
-    Route::post('/categories/{id}',[ArticleController::class,'updateCategories'])->name('categories.update');
-    Route::delete('/categories',[ArticleController::class,'destroyCategories'])->name('categories.destroy');
-    
+    Route::get('/categories',[CategorieController::class,'index'])->name('categories.index');
+    Route::get('/categories/create',[CategorieController::class,'create'])->name('categories.create');  
+    Route::post('/categories',[CategorieController::class,'store'])->name('categories.store');
+    Route::get('/categories/{id}/edit',[CategorieController::class,'edit'])->name('categories.edit');
+    Route::put('/categories/{id}', [CategorieController::class, 'update'])->name('categories.update');
+    Route::delete('/categories',[CategorieController::class,'destroy'])->name('categories.destroy');
     
 });
 
