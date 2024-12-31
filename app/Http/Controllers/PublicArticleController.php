@@ -4,29 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class PublicArticleController extends Controller
 {
     public function index()
-    {
-        try {
-            $articles = Article::where('isActive', true)
-                ->latest()
-                ->get();
-                
-            return response()->json([
-                'status' => 'success',
-                'data' => $articles
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Unable to fetch articles'
-            ], 500);
-        }
+{
+    try {
+        $articles = Article::where('isActive', true)
+            ->latest()
+            ->get()
+            ->map(function ($article) {
+                return array_map('utf8_encode', $article->toArray());
+            });
+            
+        return response()->json([
+            'status' => 'success',
+            'data' => $articles
+        ]);
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Unable to fetch articles'
+        ], 500);
     }
+}
 
     public function show($id)
     {

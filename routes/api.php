@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PublicCategorieController;
 use App\Http\Controllers\PublicArticleController;
 use Illuminate\Http\Request;
@@ -16,3 +18,7 @@ Route::prefix('categories')->group(function () {
     Route::get('/', [PublicCategorieController::class, 'index']);
     Route::get('/{id}', [PublicCategorieController::class, 'show']);
 });
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/confirm-payment', [PaymentController::class, 'confirmPayment'])->middleware('auth:sanctum');
