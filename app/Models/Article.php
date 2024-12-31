@@ -13,6 +13,7 @@ class Article extends Model
         'isActive',
         'price',
         'stock',
+        'categorie_id',
     ];
 
     public function category()

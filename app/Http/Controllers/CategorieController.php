@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class CategorieController extends Controller
+class CategorieController extends Controller implements HasMiddleware
 {
+
+
+    public static function middleware():array
+    {
+        return[
+            new Middleware('permission:view categories',only:['index','show']),
+            new Middleware('permission:create categories',only:['create','store']),
+            new Middleware('permission:update categories',only:['edit','update']),
+            new Middleware('permission:delete categories',only:['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -128,8 +141,16 @@ class CategorieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categorie $categorie)
+    public function destroy(Request $request)
     {
-        //
+        $categorie=Categorie::findOrFail($request->id);
+        if($categorie==null){
+            session()->flash('error','Category not found');
+            return response()->json(['status'=>false]);
+        }
+
+        $categorie->delete();
+        session()->flash('success','Category deleted successfully');
+        return response()->json(['status'=>true]);
     }
 }

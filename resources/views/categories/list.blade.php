@@ -52,11 +52,15 @@
                                     {{ \Carbon\Carbon::parse($category->created_at)->format('d M, Y') }}
                                 </td>
                                 <td class="px-6 py-3 text-center">
+                                    @can('edit categories')
                                     <a href="{{ route('categories.edit', $category->id) }}"
                                         class="bg-orange-500 text-sm rounded-md text-black px-3 py-3 hover:bg-slate-50">Edit</a>
-                                    <a href="#" onclick="deleteCategory({{ $category->id }})"
+                                    @endcan
+                                    @can('delete categories')
+                                        <a href="#" onclick="deleteCategory({{ $category->id }})"
                                         class="bg-red-500 text-sm rounded-md text-black px-3 py-3 hover:bg-slate-50">Delete</a>
-                                </td>
+                                    @endcan
+                                    </td>
                             </tr>
                         @endforeach
                     @endif

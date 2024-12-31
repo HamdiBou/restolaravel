@@ -2,9 +2,9 @@
     <x-slot name="header">
         <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Roles') }}
+                {{ __('Users') }}
             </h2>
-            <a href="{{ route('roles.create') }}" class="bg-white text-sm rounded-md text-black px-3 py-3">create</a>
+            <a href="{{ route('users.create') }}" class="bg-white text-sm rounded-md text-black px-3 py-3">create</a>
         </div>
     </x-slot>
 
@@ -16,44 +16,42 @@
                     <tr class="border-b">
                         <th class="px-6 py-3 text-left">#</th>
                         <th class="px-6 py-3 text-left">Name</th>
-                        <th class="px-6 py-3 text-left">Permissions</th>
+                        <th class="px-6 py-3 text-left">email</th>
                         <th class="px-6 py-3 text-left">created</th>
                         <th class="px-6 py-3 text-center">action</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
-                    @if ($roles->isNotEmpty())
-                        @foreach ($roles as $role)
+                    @if ($users->isNotEmpty())
+                        @foreach ($users as $user)
                             <tr class="border-b">
                                 <td class="px-6 py-3 text-left">
-                                    {{ $role->id }}
+                                    {{ $user->id }}
                                 </td>
                                 <td class="px-6 py-3 text-left">
-                                    {{ $role->name }}
+                                    {{ $user->name }}
                                 </td>
                                 <td class="px-6 py-3 text-left">
                                     {{-- Display permissions as a comma-separated list --}}
-                                    {{ $role->permissions->pluck('name')->implode('') }}
+                                    {{ $user->email }}
                                 </td>
+                                
                                 <td class="px-6 py-3 text-left">
-                                    {{ $role->created_at->format('d M, Y') }}
+                                    {{ $user->created_at->format('d M, Y') }}
                                 </td>
                                 <td class="px-6 py-3 text-center">
                                     {{-- Action buttons (Edit/Delete) --}}
-                                    @can('edit roles')
-                                    <a href="{{ route('roles.edit', $role->id) }}" class="text-blue-500 hover:underline">Edit</a>
-                                    @endcan
-                                    @can('delete roles')
-                                    <a href="javascript:void(0)" onclick="deleteRole({{ $role->id }})"
+                                    <a href="{{ route('users.edit', $user->id) }}" class="text-blue-500 hover:underline">Edit</a>
+                                    <a href="javascript:void(0)" onclick="deleteUser({{ $user->id }})"
                                         class="text-red-500 hover:underline">Delete</a>
-                                    @endcan
+                                    
                                 </td>
                             </tr>
                         @endforeach
                     @else
                         <tr>
                             <td colspan="5" class="px-6 py-3 text-center text-gray-500">
-                                No roles available.
+                                No users available.
                             </td>
                         </tr>
                     @endif
@@ -65,10 +63,10 @@
     </div>
     <x-slot name="script">
         <script type="text/javascript">
-            function deleteRole($id) {
-                if (confirm('Are you sure you want to delete this role?')) {
+            function deleteUser($id) {
+                if (confirm('Are you sure you want to delete this user?')) {
                     $.ajax({
-                        url: '{{ route('roles.destroy') }}',
+                        url: '{{ route('users.destroy') }}',
                         type: 'DELETE',
                         data: {
                             id: $id
@@ -78,7 +76,7 @@
                             'x-csrf-token': '{{ csrf_token() }}'
                         },
                         success: function(response) {
-                            window.location.href = '{{ route('roles.index') }}';
+                            window.location.href = '{{ route('users.index') }}';
                         }
                     });
 
