@@ -17,6 +17,7 @@
                         <th class="px-6 py-3 text-left">#</th>
                         <th class="px-6 py-3 text-left">Name</th>
                         <th class="px-6 py-3 text-left">email</th>
+                        <th class="px-6 py-3 text-left">Roles</th>
                         <th class="px-6 py-3 text-left">created</th>
                         <th class="px-6 py-3 text-center">action</th>
                     </tr>
@@ -35,7 +36,9 @@
                                     {{-- Display permissions as a comma-separated list --}}
                                     {{ $user->email }}
                                 </td>
-                                
+                                <td class="px-6 py-3 text-left">
+                                    {{$user->roles->pluck('name')->implode(', ')}}
+                                    </td>
                                 <td class="px-6 py-3 text-left">
                                     {{ $user->created_at->format('d M, Y') }}
                                 </td>

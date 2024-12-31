@@ -12,24 +12,29 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('roles.store') }}" method="post">
+                    <form action="{{ route('roles.update', $roles->id) }}" method="post">
                         @csrf
+                        {{-- @method('PUT') --}} <!-- Add method directive -->
+
                         <div>
-                            <label for="" class="text-sm font-medium">Name</label>
+                            <!-- Role Name -->
+                            <label for="name" class="text-sm font-medium">Name</label>
                             <div class="mb-3">
-                                <input value="{{ old('name'),$roles->name }}" name="name" placeholder="Enter Name"
-                                    type="text" class="border-gray-300 shadow-sm w-1/2s rounded-1g text-black">
+                                <input value="{{ old('name', $roles->name) }}" name="name" id="name" placeholder="Enter Name"
+                                    type="text" class="border-gray-300 shadow-sm w-1/2 rounded-lg text-black">
                                 @error('name')
                                     <p class="text-red-400 font-medium">{{ $message }}</p>
                                 @enderror
                             </div>
 
+                            <!-- Permissions -->
                             <div class="grid grid-cols-4 gap-4">
                                 @if ($permissions->isNotEmpty())
                                     @foreach ($permissions as $permission)
                                         <div class="mt-3">
-                                            <input {{($haspermissions->contains($permission->name)) ? 'checked':''}} type="checkbox" id="permission-{{ $permission->id }}" class="rounded" name="permissions[]"
-                                                value="{{ $permission->name }}">
+                                            <input {{ $haspermissions->contains($permission->name) ? 'checked' : '' }} 
+                                                type="checkbox" id="permission-{{ $permission->id }}" class="rounded" 
+                                                name="permissions[]" value="{{ $permission->name }}">
                                             <label for="permission-{{ $permission->id }}" class="ml-2 text-sm font-medium">
                                                 {{ $permission->name }}
                                             </label>
@@ -41,9 +46,11 @@
                                     </div>
                                 @endif
                             </div>
-                            
-                            <button class="bg-white text-sm rounded-md text-black px-5 py-3">submit</button>
 
+                            <!-- Submit Button -->
+                            <button type="submit" class="bg-white text-sm rounded-md text-black px-5 py-3 mt-4">
+                                Submit
+                            </button>
                         </div>
                     </form>
                 </div>

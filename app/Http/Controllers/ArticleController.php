@@ -8,16 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\Middleware;
+use PhpParser\Node\Stmt\TryCatch;
+
 class ArticleController extends Controller implements HasMiddleware
 {
 
     public static function middleware():array
     {
         return[
-            new Middleware('permission:view roles',only:['index','show']),
-            new Middleware('permission:create roles',only:['create','store']),
-            new Middleware('permission:update roles',only:['edit','update']),
-            new Middleware('permission:delete roles',only:['destroy']),
+            new Middleware('permission:view articles',only:['index']),
+            new Middleware('permission:create articles',only:['create','store']),
+            new Middleware('permission:update articles',only:['edit','update']),
+            new Middleware('permission:delete articles',only:['destroy']),
         ];
     }
     // Show all articles
@@ -26,7 +28,22 @@ class ArticleController extends Controller implements HasMiddleware
         $articles = Article::latest()->paginate(10); // Retrieve all articles
         return view('articles.list', ['articles'=>$articles]);
     }
-
+    //api
+    //show all articles
+    public function showall()
+    {
+        try {
+            $articles = Article::latest()->get(); // Retrieve all articles
+            return response()->json($articles);
+        } catch (\Exception $ex) {
+            return response()->json($ex->getMessage());
+        }
+    }// Show one article
+    public function show($id)
+    {
+        $article = Article::findOrFail($id); // Find the article by ID
+        return response()->json($article);
+    }
     // Show the form to create a new article
     public function create()
     {

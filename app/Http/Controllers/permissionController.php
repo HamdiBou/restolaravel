@@ -3,26 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Routing\Controllers\HasMiddleware;
-
+use Illuminate\Routing\Controllers\Middleware;
 class permissionController extends Controller implements HasMiddleware
 {
 
     public static function middleware():array
     {
         return[
-            new Middleware('permission:view prermissions',only:['index','show']),
-            new Middleware('permission:create permissions',only:['create','store']),
-            new Middleware('permission:update permissions',only:['edit','update']),
-            new Middleware('permission:delete permission',only:['destroy']),
+            new Middleware('permission:view prermissions',only:['index']),
+            new Middleware('permission:create permissions',only:['create']),
+            new Middleware('permission:update permissions',only:['edit']),
+            new Middleware('permission:delete permissions',only:['destroy']),
         ];
     }
     //
     public function index(){
-        $permissions = Permission::orderBy('created_at','DESC')->paginate(3);
+        $permissions = Permission::orderBy('created_at','DESC')->paginate(10);
         return view('permissions.list',[
             'permissions' => $permissions
         ]);
@@ -56,6 +55,7 @@ class permissionController extends Controller implements HasMiddleware
         if($validator->passes()){
            // Permission::create(['name' =>$request->name]);
            $permissions->name=$request->name;
+
            $permissions->save();
             return redirect()->route('permissions.index')->with('success','Permission created successfully');
         }else{
