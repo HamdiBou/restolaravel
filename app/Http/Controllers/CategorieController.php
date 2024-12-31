@@ -31,23 +31,6 @@ class CategorieController extends Controller implements HasMiddleware
             'categories'=>$categories
         ]);
     }
-    //api
-    public function showall(){
-        try {
-            $categories=Categorie::all();
-            return response()->json($categories);
-            } catch (\Exception $e) {
-            return response()->json("probleme de récupération de la liste des catégories");
-        }
-    }
-    public function show($id){
-        try {
-            $categorie=Categorie::findOrFail($id);
-            return response()->json($categorie);
-        } catch (\Exception $e) {
-            return response()->json("probleme de récupération de la catégorie");
-        }
-    }
     //
     public function create()
     {

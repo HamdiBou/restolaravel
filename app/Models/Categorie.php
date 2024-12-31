@@ -11,7 +11,6 @@ class Categorie extends Model
         'description',
         'image',
         'isActive',
-
     ];
     public function articles()
     {

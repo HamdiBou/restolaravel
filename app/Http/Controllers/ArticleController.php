@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\Middleware;
-use PhpParser\Node\Stmt\TryCatch;
+
 
 class ArticleController extends Controller implements HasMiddleware
 {
@@ -28,29 +28,7 @@ class ArticleController extends Controller implements HasMiddleware
         $articles = Article::latest()->paginate(10); // Retrieve all articles
         return view('articles.list', ['articles'=>$articles]);
     }
-    //api
-    //show all articles
-    public function showall()
-    {
-        try {
-            $articles = Article::latest()->get(); // Retrieve all articles
-            return response()->json($articles);
-        } catch (\Exception $ex) {
-            return response()->json($ex->getMessage());
-        }
-    }// Show one article
-    public function show($id)
-    {
-        $article = Article::findOrFail($id); // Find the article by ID
-        return response()->json($article);
-    }
-    // Show the form to create a new article
-    public function create()
-    {
-        $categories = Categorie::all(); // Retrieve all categories
-        return view('articles.create', compact('categories'));
-    }
-
+    
     // Store the newly created article
     public function store(Request $request)
     {
