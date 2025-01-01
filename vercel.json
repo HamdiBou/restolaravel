@@ -14,7 +14,7 @@
     "APP_ENV": "production",
     "APP_DEBUG": "true",
     "APP_URL": "https://restolaravel-eta.vercel.app/",
-    "APP_KEY": "AOUYEjMImK9DwKQgZbH6weVJ8Fpr0Lk17HDsDzpopho=",
+    "APP_KEY": "base64:AOUYEjMImK9DwKQgZbH6weVJ8Fpr0Lk17HDsDzpopho=",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
