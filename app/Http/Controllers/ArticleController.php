@@ -28,7 +28,12 @@ class ArticleController extends Controller implements HasMiddleware
         $articles = Article::latest()->paginate(10); // Retrieve all articles
         return view('articles.list', ['articles'=>$articles]);
     }
-    
+    //create new article
+    public function create()
+    {
+        $categories = Categorie::all(); // Retrieve all categories
+        return view('articles.create', compact('categories'));
+    }
     // Store the newly created article
     public function store(Request $request)
     {
