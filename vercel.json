@@ -13,7 +13,7 @@
     "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "true",
-    "APP_URL": "https://restolaravel-eta.vercel.app/",
+    "APP_URL": "https://restolaravel-z59t.vercel.app/",
     "APP_KEY": "base64:AOUYEjMImK9DwKQgZbH6weVJ8Fpr0Lk17HDsDzpopho=",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
