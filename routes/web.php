@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\LocalPaymentController;
 use App\Http\Controllers\permissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\roleController;
@@ -55,7 +56,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/{id}/edit',[userController::class,'edit'])->name('users.edit');
     Route::post('/users/{id}',[userController::class,'update'])->name('users.update');
     Route::delete('/users',[userController::class,'destroy'])->name('users.destroy');
-
+    //payments
+    Route::get('/payments',[LocalPaymentController::class,'index'])->name('payments.index');
+    Route::get('/payments/export',[LocalPaymentController::class,'export'])->name('payments.export');
+    Route::patch('payments/{payment}/status', [LocalPaymentController::class, 'updateStatus'])->name('payments.updateStatus');
 });
 
 require __DIR__.'/auth.php';

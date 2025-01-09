@@ -16,42 +16,48 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-               {{--  @can('view permissions') --}}
+               @can('view permissions') 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions')">
                             {{ __('Permissions') }}
                         </x-nav-link>
                     </div>
-                    {{-- @endcan
-                    @can('view roles') --}}
+                    @endcan
+                    @can('view roles')
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                             <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles')">
                                 {{ __('Roles') }}
                             </x-nav-link>
                         </div>
-                        {{-- @endcan
-                        @can('view articles') --}}
+                        @endcan
+                        @can('view articles')
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles')">
                                     {{ __('Articles') }}
                                 </x-nav-link>
                             </div>
-                           {{--  @endcan
-                            @can('view categories') --}}
+                            @endcan
+                            @can('view categories')
                                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories')">
                                         {{ __('categories') }}
                                     </x-nav-link>
                                 </div>
-                                {{-- @endcan
-                                @can('view users') --}}
+                                @endcan
+                                @can('view users')
                                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users')">
                                         {{ __('users') }}
                                     </x-nav-link>
                                 </div>
-
-                                {{-- @endcan --}}
+                                @endcan
+                                @can('view payments')
+                                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <x-nav-link :href="route('payments.index')" :active="request()->routeIs('payments')">
+                                        {{ __('payments') }}
+                                    </x-nav-link>
+                                </div>
+                                @endcan
                             </div>
 
                             <!-- Settings Dropdown -->

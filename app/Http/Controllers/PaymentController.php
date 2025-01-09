@@ -51,7 +51,7 @@ class PaymentController extends Controller
                     'phone' => $request->phone,
                     'address' => $request->address,
                     'articles' => json_encode($request->articles),
-                    'status' => 'confirmed'
+                    'status' => 'pending'
                 ]);
 
                 return response()->json([

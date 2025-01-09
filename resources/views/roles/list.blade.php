@@ -40,13 +40,13 @@
                                 </td>
                                 <td class="px-6 py-3 text-center">
                                     {{-- Action buttons (Edit/Delete) --}}
-                                    {{-- @can('edit roles') --}}
+                                    @can('edit roles')
                                     <a href="{{ route('roles.edit', $role->id) }}" class="text-blue-500 hover:underline">Edit</a>
-                                    {{-- @endcan
-                                    @can('delete roles') --}}
+                                    @endcan
+                                    @can('delete roles')
                                     <a href="javascript:void(0)" onclick="deleteRole({{ $role->id }})"
                                         class="text-red-500 hover:underline">Delete</a>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

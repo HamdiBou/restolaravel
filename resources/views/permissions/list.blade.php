@@ -35,14 +35,14 @@
                                     {{ \Carbon\Carbon::parse($permission->created_at)->format('d M, Y') }}
                                 </td>
                                 <td class="px-6 py-3 text-center">
-                                    {{-- @can('edit permissions') --}}
+                                    @can('edit permissions')
                                     <a href="{{ route('permissions.edit', $permission->id) }}"
                                         class="bg-orange-500 text-sm rounded-md text-black px-3 py-3 hover:bg-slate-50">Edit</a>
-                                    {{-- @endcan
-                                    @can('delete permissions') --}}
+                                    @endcan
+                                    @can('delete permissions')
                                         <a href="#" onclick="deletePermission({{ $permission->id }})"
                                         class="bg-red-500 text-sm rounded-md text-black px-3 py-3 hover:bg-slate-50">Delete</a>
-                                    {{-- @endcan --}}
+                                    @endcan
                                     </td>
                             </tr>
                         @endforeach

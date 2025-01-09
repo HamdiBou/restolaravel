@@ -60,14 +60,14 @@
                                     {{ \Carbon\Carbon::parse($article->created_at)->format('d M, Y') }}
                                 </td>
                                 <td class="px-6 py-3 text-center">
-                                    {{-- @can('edit articles') --}}
+                                    @can('edit articles')
                                     <a href="{{ route('articles.edit', $article->id) }}"
                                         class="bg-orange-500 text-sm rounded-md text-black px-3 py-3 hover:bg-slate-50">Edit</a>
-                                    {{-- @endcan
-                                    @can('delete articles') --}}
+                                    @endcan
+                                    @can('delete articles')
                                         <a href="#" onclick="deletearticle({{ $article->id }})"
                                         class="bg-red-500 text-sm rounded-md text-black px-3 py-3 hover:bg-slate-50">Delete</a>
-                                    {{-- @endcan --}}
+                                    @endcan
                                     </td>
                             </tr>
                         @endforeach
